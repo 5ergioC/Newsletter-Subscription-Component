@@ -1,3 +1,34 @@
+# Newsletter Subscription Component — TinaCMS
+
+A reusable **Newsletter Subscription** content block built as a TinaCMS block on
+top of the official Tina + Next.js starter (`tina-nextjs-starter`). It is fully
+editable through the TinaCMS visual editor and styled with a pixel-art /
+brutalist look inspired by [purduehackers.com](https://www.purduehackers.com).
+
+- 📦 Component docs & technical decisions: **[`docs/NEWSLETTER.md`](docs/NEWSLETTER.md)**
+- 🚀 Deploy guide (Tina Cloud + Vercel): **[`docs/DEPLOY.md`](docs/DEPLOY.md)**
+- 🧩 Demo page: `content/pages/newsletter-demo.mdx` → route **`/newsletter-demo`**
+- 🛠️ Stack: Next.js 15, React 18, TinaCMS 3, SCSS Modules, `next/font`
+
+## Quick start
+
+> Requires **Node 22 or 24** (the Tina toolchain ships native deps with
+> prebuilt binaries for those versions). This repo uses **npm**.
+
+```bash
+npm install
+npm run dev
+```
+
+| URL | What |
+| --- | --- |
+| `http://localhost:3000/newsletter-demo` | The Newsletter block in a page |
+| `http://localhost:3000/admin` | TinaCMS visual editor |
+
+> Note: if port 3000 is busy the dev server uses 3001 — check the terminal.
+
+---
+
 # Tina Starter 🦙
 
 ![tina-nextjs-starter-demo](https://user-images.githubusercontent.com/103008/130587027-995ccc45-a852-4f90-b658-13e8e0517339.gif)
