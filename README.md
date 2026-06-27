@@ -1,143 +1,95 @@
 # Newsletter Subscription Component — TinaCMS
 
-A reusable **Newsletter Subscription** content block built as a TinaCMS block on
-top of the official Tina + Next.js starter (`tina-nextjs-starter`). It is fully
-editable through the TinaCMS visual editor and styled with a pixel-art /
-brutalist look inspired by [purduehackers.com](https://www.purduehackers.com).
+A reusable **Newsletter Subscription** content block for a TinaCMS + Next.js
+website. Every element — headline (with an optional highlight), description,
+email field, subscribe button, privacy-consent checkbox and the success/error
+messages — is editable from the TinaCMS visual editor, with changes committed
+back to GitHub and redeployed automatically.
 
-- 📦 Component docs & technical decisions: **[`docs/NEWSLETTER.md`](docs/NEWSLETTER.md)**
-- 🚀 Deploy guide (Tina Cloud + Vercel): **[`docs/DEPLOY.md`](docs/DEPLOY.md)**
-- 🧩 Demo page: `content/pages/newsletter-demo.mdx` → route **`/newsletter-demo`**
-- 🛠️ Stack: Next.js 15, React 18, TinaCMS 3, SCSS Modules, `next/font`
+The component is styled with a pixel-art / brutalist look inspired by
+[purduehackers.com](https://www.purduehackers.com). No email service is
+integrated — the focus is UI behavior (validation, hover, feedback) and a
+complete CMS integration.
+
+> Built as a frontend technical-interview assignment. See
+> [`docs/NEWSLETTER.md`](docs/NEWSLETTER.md) for the full write-up of decisions.
+
+## Links
+
+| | |
+| --- | --- |
+| Live demo | https://newsletter-subscription-component.vercel.app |
+| Visual editor | https://newsletter-subscription-component.vercel.app/admin |
+| Demo page (block in a page) | `/newsletter-demo` |
+
+## Tech stack
+
+Next.js 15 · React 18 · TinaCMS 3 (Tina Cloud) · SCSS Modules · `next/font`
+
+## Project structure
+
+```
+components/blocks/
+  newsletter.tsx          # React component: render, form state, validation, feedback
+  newsletter.schema.ts    # TinaCMS template (editable fields, defaults)
+  newsletter.module.scss  # Scoped pixel-art styles
+  index.tsx               # Maps the block type to the component
+tina/collection/page.ts   # Registers the block in the page's block list
+content/pages/             # home.mdx (features the block) + newsletter-demo.mdx
+docs/                      # Component, deployment and technical documentation
+```
 
 ## Quick start
 
-> Requires **Node 22 or 24** (the Tina toolchain ships native deps with
-> prebuilt binaries for those versions). This repo uses **npm**.
+> Requires **Node 22 or 24** (the Tina toolchain ships native dependencies with
+> prebuilt binaries for those versions). This project uses **npm**.
 
 ```bash
 npm install
 npm run dev
 ```
 
-| URL | What |
-| --- | --- |
-| `http://localhost:3000/newsletter-demo` | The Newsletter block in a page |
-| `http://localhost:3000/admin` | TinaCMS visual editor |
+- `http://localhost:3000` — the site (home features the Newsletter block)
+- `http://localhost:3000/admin` — the TinaCMS visual editor
+- If port 3000 is busy the dev server uses 3001 (check the terminal output)
 
-> Note: if port 3000 is busy the dev server uses 3001 — check the terminal.
+## The Newsletter block
 
----
-
-# Tina Starter 🦙
-
-![tina-nextjs-starter-demo](https://user-images.githubusercontent.com/103008/130587027-995ccc45-a852-4f90-b658-13e8e0517339.gif)
-
-This Next.js starter is powered by [TinaCMS](https://app.tina.io) for you and your team to visually live edit the structured content of your website. ✨
-
-The content is managed through Markdown and JSON files stored in your GitHub repository, and queried through Tina GraphQL API.
-
-### Features
-
-- [Tina Headless CMS](https://app.tina.io) for authentication, content modeling, visual editing and team management.
-- [Vercel](https://vercel.com) deployment to visually edit your site from the `/admin` route.
-- Local development workflow from the filesystem with a local GraqhQL server.
-
-## Requirements
-
-- Git, [Node.js Active LTS](https://nodejs.org/en/about/releases/), pnpm installed for local development.
-- A [TinaCMS](https://app.tina.io) account for live editing.
-
-## Local Development
-
-Install the project's dependencies:
-
-> [!NOTE]  
-> [Do you know the best package manager for Node.js?](https://www.ssw.com.au/rules/best-package-manager-for-node/) Using the right package manager can greatly enhance your development workflow. We recommend using pnpm for its speed and efficient handling of dependencies. Learn more about why pnpm might be the best choice for your projects by checking out this rule from SSW.
-
-
-```
-pnpm install
-```
-
-Run the project locally:
-
-```
-pnpm dev
-```
-
-### Local URLs
-
-- http://localhost:3000 : browse the website
-- http://localhost:3000/admin : connect to Tina Cloud and go in edit mode
-- http://localhost:3000/exit-admin : log out of Tina Cloud
-- http://localhost:4001/altair/ : GraphQL playground to test queries and browse the API documentation
+Usage (visual editor and `.mdx`), editable fields, behavior and the technical
+decisions behind the implementation are documented in
+**[`docs/NEWSLETTER.md`](docs/NEWSLETTER.md)**.
 
 ## Deployment
 
-### GitHub Pages
+Local development needs no cloud account. The live site connects **TinaCMS
+Cloud** (hosted editor backend) and deploys to **Vercel**. Step-by-step guide:
+**[`docs/DEPLOY.md`](docs/DEPLOY.md)**.
 
-This starter can be deployed to GitHub Pages. A GitHub Actions workflow is included that handles the build and deployment process. 
+## Documentation
 
-To deploy to GitHub Pages:
+- [`docs/NEWSLETTER.md`](docs/NEWSLETTER.md) — component usage & technical decisions
+- [`docs/DEPLOY.md`](docs/DEPLOY.md) — Tina Cloud + Vercel deployment
+- `docs/Newsletter-Component-Technical-Documentation.docx` — full technical write-up
 
-1. In your repository settings, ensure GitHub Pages is enabled and set to deploy from the `gh-pages` branch
-2. Push changes to your main branch - the workflow will automatically build and deploy the site
+## Notes for reviewers
 
-> [!NOTE]
-> When deploying to GitHub Pages, you'll need to update your secrets in Settings | Secrets and variables | Actions to include:
-> - `NEXT_PUBLIC_TINA_CLIENT_ID`
-> - `TINA_TOKEN`
->
-> You get these from your TinaCloud project - [read the docs](https://tina.io/docs/tina-cloud/deployment-options/github-pages)
+- **Edits are not instant on the live site.** Saving in the visual editor
+  commits to GitHub and triggers a Vercel rebuild, so changes typically appear
+  on the live URL after ~1–2 minutes (not in real time).
+- **The `/admin` editor is intentionally left open** (no access restriction) so
+  it can be freely tested for this challenge. For a real deployment the editor
+  should be protected — e.g. TinaCMS Cloud access control / authentication and
+  Vercel deployment protection.
+- **AI assistance.** Claude was used as a tool — for planning, implementation
+  and documentation — as the brief encouraged. All decisions were reviewed,
+  tested, and are owned by me.
 
-> [!IMPORTANT]
-> GitHub Pages does not support server side code, so this will run as a static site. If you don't want to deploy to GitHub pages, just delete `.github/workflows/build-and-deploy.yml`
+## Origins & license
 
-### Building the Starter Locally (Using the hosted content API)
-
-Replace the `.env.example`, with `.env`
-
-```
-NEXT_PUBLIC_TINA_CLIENT_ID=<get this from the project you create at app.tina.io>
-TINA_TOKEN=<get this from the project you create at app.tina.io>
-NEXT_PUBLIC_TINA_BRANCH=<Specify the branch with Tina configured>
-```
-
-Build the project:
-
-```bash
-pnpm build
-```
-
-## Getting Help
-
-To get help with any TinaCMS challenges you may have:
-
-- Visit the [documentation](https://tina.io/docs/) to learn about Tina.
-- [Join our Discord](https://discord.gg/zumN63Ybpf) to share feedback.
-- Visit the [community forum](https://community.tinacms.org/) to ask questions.
-- Get support through the chat widget on the TinaCMS Dashboard
-- [Email us](mailto:support@tina.io) to schedule a call with our team and share more about your context and what you're trying to achieve.
-- [Search or open an issue](https://github.com/tinacms/tinacms/issues) if something is not working.
-- Reach out on Twitter at [@tina_cms](https://twitter.com/tina_cms).
-
-## Development tips
-
-### Visual Studio Code GraphQL extension
-
-[Install the GraphQL extension](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql) to benefit from type auto-completion.
-
-### Typescript
-
-A good way to ensure your components match the shape of your data is to leverage the auto-generated TypeScript types.
-These are rebuilt when your `tina` config changes.
-
-## LICENSE
+Bootstrapped from TinaCMS's official Next.js starter
+(`tina-nextjs-starter`, via `create-tina-app`), then trimmed to focus on the
+Newsletter component. The original starter and its documentation live upstream
+at [tina.io](https://tina.io/docs) and the
+[TinaCMS repository](https://github.com/tinacms/tinacms).
 
 Licensed under the [Apache 2.0 license](./LICENSE).
-
-
-# Repository cleaned of LFS content
-# Repository cleaned of LFS content - Wed Sep 17 15:00:42 AEST 2025
-
