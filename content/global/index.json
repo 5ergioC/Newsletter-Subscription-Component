@@ -1,11 +1,11 @@
 {
   "header": {
     "icon": {
-      "name": "Tina",
-      "color": "orange",
+      "name": "BiEnvelope",
+      "color": "blue",
       "style": "float"
     },
-    "name": "Tina Starter",
+    "name": "Newsletter Component",
     "color": "default",
     "nav": [
       {
@@ -13,12 +13,8 @@
         "label": "Home"
       },
       {
-        "href": "/about",
-        "label": "About"
-      },
-      {
-        "href": "/posts",
-        "label": "Blog"
+        "href": "/newsletter-demo",
+        "label": "Demo"
       }
     ]
   },
@@ -26,27 +22,9 @@
     "social": [
       {
         "icon": {
-          "name": "FaLinkedin"
-        },
-        "url": "https://www.linkedin.com/company/tinacms"
-      },
-      {
-        "icon": {
           "name": "FaGithub"
         },
-        "url": "https://github.com/tinacms/tinacms"
-      },
-      {
-        "icon": {
-          "name": "FaYoutube"
-        },
-        "url": "https://www.youtube.com/@TinaCMS"
-      },
-      {
-        "icon": {
-          "name": "FaXTwitter"
-        },
-        "url": "https://x.com/TinaCMS"
+        "url": "https://github.com/5ergioC/Newsletter-Subscription-Component"
       }
     ]
   },
